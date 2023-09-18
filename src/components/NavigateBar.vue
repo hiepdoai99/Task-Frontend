@@ -1,11 +1,11 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import {$axios} from "../utils/request.js";
-import {useRouter, useRoute} from 'vue-router';
+import {useRouter} from 'vue-router';
 import store from '../store/store'
 const router = useRouter()
-const route = useRoute()
-let roledata = ref('')
+//const route = useRoute()
+let roledata = ''
 
 // const trackRole = computed(() => {
 // 	return store.state.userLoginRole
@@ -68,7 +68,10 @@ const afterLoginRoleCheck = () =>{
 
 const afterReloadRolecheck = () =>{
     roledata = localStorage.getItem('loginRole');
-		//console.log('roledata reload check here',roledata)
+	if(roledata === null){
+		roledata === ''
+		console.log('roledata reload check here',roledata)
+	}
 
 		if (roledata === 'ROOT' || roledata ==="ADMIN"){
 			adminVisible.value = !adminVisible.value

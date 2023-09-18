@@ -22,13 +22,16 @@ let canAddTeam = ref(false)
 const teams = ref([])
 const currentPage = ref(1);
 const payloadData = ref([]);
+const modalWarningActive = ref(null);
 let maxPage = 5;
 onMounted(() => {
     getData()
 		editTeamRoleCheck()
 		addTeamRoleCheck()
 })
-
+const toggleWarningModal = () => {
+  modalWarningActive.value = !modalWarningActive.value;
+};
 const editTeamRoleCheck = () =>{
 	const requiredRole = localPermissions.find((roles)=>{
 		return roles === 'TEAM-UPDATE'
@@ -105,7 +108,7 @@ const getData = () => {
 	localPermissions= localPermissions.map(e => e.name)
 }
 const deleteobj = (teamId	) => {
-    $axios.delete('/team/' + teamId).then(res => {
+    $axios.delete('/team/' + teamId).then(() => {
         getData()
     })
 }
@@ -119,7 +122,7 @@ const deleteobj = (teamId	) => {
             <h1 class="form-header">Team manager</h1>
             <div class="table-search-and-add-box">
 
-            	<div class="main-btn-container">
+							<div class="main-btn-container">
 								<div v-if="canAddTeam === true" class="main-btn-box">
 									<button class="main-btn">
 											<router-link class="linktext" to="/add-team">Add Team</router-link>
@@ -195,6 +198,12 @@ const deleteobj = (teamId	) => {
 				</div>		
     </main>
     </body>
+	<BaseModal
+		:modalActive="modalWarningActive"
+		@close-modal="toggleWarningModal"
+	>		
+		We are sorry but you do not have the permission to do this action
+	</BaseModal>
 </template>
 
 

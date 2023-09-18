@@ -1,6 +1,6 @@
 <script setup>
 import {$axios} from '../utils/request'
-import {useRouter, useRoute} from 'vue-router'
+//import {useRouter, useRoute} from 'vue-router'
 import BaseModal from '../components/BaseModal.vue'
 import ViewModal from '../components/ViewModal.vue'
 import store from "../store/store";
@@ -11,8 +11,8 @@ import {
     ref, watch
 } from "vue";
 
-const router = useRouter()
-const route = useRoute()
+// const router = useRouter()
+// const route = useRoute()
 let localPermissions = JSON.parse(localStorage.getItem('permissions'))
 
 const modalActive = ref(null);
@@ -20,7 +20,7 @@ const modalWarningActive = ref(null);
 let canEdit = ref(false);
 let taskdetail = ref();
 const todoList = ref([]);
-const payloadData = ref([]);
+let payloadData = ref([]);
 let maxPage = 5;
 const input = ref('');
 const currentPage = ref(1);
@@ -83,7 +83,7 @@ const viewDetailRoleCheck =(id) =>{
 }
 
 const onClickHandler = (page) => {
-		$axios.get(`/task?include=user,project,status,assignee,comments&project_id=${projectIdSelected}&per_page=2&page=${page}`).then((data) => {
+		$axios.get(`/task?include=user,project,status,assignee,comments&project_id=${projectIdSelected.value}&per_page=2&page=${page}`).then((data) => {
         todoList.value = data.data.data
     })
   };
@@ -91,8 +91,8 @@ const onClickHandler = (page) => {
 onMounted(() => {
 	filterPermissions()
 	window.addEventListener('projectId-added', () => {
-    projectIdSelected = localStorage.getItem('selectedProjectId');
-		getData(projectIdSelected)
+    projectIdSelected.value = localStorage.getItem('selectedProjectId');
+		getData(projectIdSelected.value)
 		editTaskRoleCheck()
   });
 	getSelectedIdlocal()
@@ -101,8 +101,8 @@ onMounted(() => {
 
 const getSelectedIdlocal = () =>{
 	if(projectIdSelected.value === undefined){
-		projectIdSelected = localStorage.getItem('selectedProjectId');
-		getData(projectIdSelected)
+		projectIdSelected.value = localStorage.getItem('selectedProjectId');
+		getData(projectIdSelected.value)
 	}
 
 }
@@ -119,8 +119,8 @@ const getData = (projectId) => {
 }
 
 const deleteobj = (todoId) => {
-    $axios.delete('/task/' + todoId).then(res => {
-        getData(projectIdSelected)
+    $axios.delete('/task/' + todoId).then(() => {
+        getData(projectIdSelected.value)
     })
 }
 

@@ -1,5 +1,6 @@
 <script setup>
-const props = defineProps({
+import {defineProps} from 'vue';
+ defineProps({
   taskdetail: Object,
 });
 </script>
@@ -46,7 +47,7 @@ const props = defineProps({
 	}
 
 	span::after {
-  	content: ", ";
+	content: ", ";
 	}
 
 	th{

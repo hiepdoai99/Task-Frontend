@@ -22,7 +22,7 @@ watch(userTeamsData,(newteams)=>{
 })
 
 const projectLengthCheck = ()=>{
-  if(  userTeamsDatasLocal === null){
+  if(userTeamsDatasLocal === null){
     if(projects.value.length !== 0){
     showProjects = true
     } else if (projects.value.length === 0){
@@ -38,10 +38,10 @@ const afterReloadTeamsCheck = () =>{
   }
 
   if(projectsLocal !== null){
-    projects = projectsLocal
-    if(projects.length !== 0){
+    projects.value = projectsLocal
+    if(projects.value.length !== 0){
     showProjects = true
-    } else if (projects.length === 0){
+    } else if (projects.value.length === 0){
       showProjects = false
     }
   }

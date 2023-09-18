@@ -36,8 +36,8 @@ const getTeams = () => {
 const getEmails = () => {
     $axios.get('/user?filter[email]=').then((data) => {
 				emailRes.value = data.data.data
-				emailArrayFormData = JSON.parse(JSON.stringify(emailRes.value))
-				emailArrayFormDataFiltered = emailArrayFormData.map((e)=>{
+				emailArrayFormData.value = JSON.parse(JSON.stringify(emailRes.value))
+				emailArrayFormDataFiltered = emailArrayFormData.value.map((e)=>{
 					return {
 						id: e.id,
 						email: e.email
@@ -61,7 +61,8 @@ const sendInvitation = async () => {
 					team_id: formState.team_id,
 					id: formState.id,
 				}).then(
-            (data) => {
+			//(data)
+            () => {
                 router.push('/team')
             }
         )
@@ -70,7 +71,8 @@ const sendInvitation = async () => {
 					team_id: formState.team_id,
 					email: formState.email
 				}).then(
-            (data) => {
+			//(data)
+            () => {
                 router.push('/team')
             }
         )

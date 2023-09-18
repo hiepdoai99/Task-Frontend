@@ -63,14 +63,14 @@ const getStatus = () => {
     })
 }
 const getProject = () => {
-		projectIdSelected = localStorage.getItem('selectedProjectId');
-		formState.project_id = projectIdSelected
+		projectIdSelected.value = localStorage.getItem('selectedProjectId');
+		formState.project_id = projectIdSelected.value
 		//currProject
     $axios.get('/project').then((data) => {
         project.value = data.data.data
     })
 
-		$axios.get(`/project/${projectIdSelected}`).then((data) => {
+		$axios.get(`/project/${projectIdSelected.value}`).then((data) => {
 				currProject.value = data.data.data
 				
     })
@@ -93,7 +93,7 @@ const addTodo = async () => {
             image: imgdata,
             end_date: formState.end_date})
             .then(
-            (data) => {
+            () => {
                 router.push('/todo')
             }
         )
@@ -149,7 +149,7 @@ const edit = () => {
         end_date: formState.end_date,
         image: imgdata,
     }).then(
-        (data) => {
+        () => {
             router.push('/todo')
         }
     )
