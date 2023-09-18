@@ -1,6 +1,6 @@
 <script setup>
 import {$axios} from '../utils/request'
-
+import BaseModal from '../components/BaseModal.vue'
 import VPagination from "@hennge/vue3-pagination"
 import "@hennge/vue3-pagination/dist/vue3-pagination.css"
 
@@ -15,12 +15,17 @@ import {
 const projects = ref([])
 const currentPage = ref(1);
 const payloadData = ref([]);
+const modalWarningActive = ref(null);
 let maxPage = 5;
 onMounted(() => {
     getData()
 		editProjectRoleCheck()
 		addProjectRoleCheck()
 })
+
+const toggleWarningModal = () => {
+  modalWarningActive.value = !modalWarningActive.value;
+};
 
 const editProjectRoleCheck = () =>{
 	const requiredRole = localPermissions.find((roles)=>{
@@ -70,7 +75,7 @@ const getData = () => {
     localPermissions= localPermissions.map(e => e.name)
 }
 const deleteobj = (projectId) => {
-    $axios.delete('/project/' + projectId).then(res => {
+    $axios.delete('/project/' + projectId).then(() => {
         getData()
     })
 }
@@ -135,6 +140,13 @@ const deleteobj = (projectId) => {
 				</div>		
     </main>
     </body>
+
+		<BaseModal
+		:modalActive="modalWarningActive"
+		@close-modal="toggleWarningModal"
+	>		
+		We are sorry but you do not have the permission to do this action
+	</BaseModal>
 </template>
 
 

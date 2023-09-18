@@ -34,6 +34,7 @@ import router from "./router";
 
 import { createApp } from "vue";
 import App from "./App.vue";
+import './registerServiceWorker'
 const app = createApp(App);
 
 app.use(router)

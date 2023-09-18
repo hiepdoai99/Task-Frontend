@@ -10,7 +10,7 @@ import {
 
 const formState = reactive(store.state.registerFormState)
 let error = ref(false);
-let userdata = ref();
+let userdata = {};
 
 const handleLogin = ()=> {
     const token = localStorage.getItem('token')
@@ -51,6 +51,7 @@ const handleLogin = ()=> {
                 router.push('/error-mail')
             }
         }).catch((err) => {
+					console.log('err here',err)
         if(err.response.status == 422) {
             error.value = true
         }

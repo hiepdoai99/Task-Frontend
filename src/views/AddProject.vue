@@ -26,7 +26,7 @@ let userDatas = ref('')
 
 onMounted(() => {
 		userRoleData = localStorage.getItem('loginRole');
-		userDatas = JSON.parse(localStorage.getItem('user'));
+		userDatas.value = JSON.parse(localStorage.getItem('user'));
     if (id) {
       getProject(id)
     }
@@ -84,33 +84,33 @@ const deleteUser = () => {
     $axios.post('/remove-user-project/', {
 			project_id: id,
 			user_id: selectedToDelUserId
-		}).then(res => {
+		}).then(() => {
 			beforeDeleteModal.value = !beforeDeleteModal.value;
 			getProject(id)
     })
 		
 }
 const getUser = () => {
-    if(userRoleData === 'ROOT' || userRoleData === 'ADMIN'){
+    if(userRoleData.value === 'ROOT' || userRoleData.value === 'ADMIN'){
         $axios.get('/user').then((data) => {
 					users.value = data.data.data
 					userlist = JSON.parse(JSON.stringify(users.value))
-    	})
-    } else if (userRoleData === 'TEAMLEADER'){
+	})
+    } else if (userRoleData.value === 'TEAMLEADER'){
 			$axios.get('/get-all-user-team').then((data) => {
 					users.value = data.data
 					userlist = JSON.parse(JSON.stringify(users.value))
-					userlist = userlist.map((e)=>{
+					userlist = userlist.value.map((e)=>{
 						return {
 							id: e.id,
 							name: e.first_name + e.last_name,
 						}
 					})
-    	})
+		})
     } else{
         userlist = [{
-						id: userDatas.id,
-						name: userDatas.first_name + userDatas.last_name
+						id: userDatas.value.id,
+						name: userDatas.value.first_name + userDatas.value.last_name
 					}]
     }
 }
@@ -146,7 +146,8 @@ const addProject = async () => {
             name: formState.name,
 						teams: formState.teams,
         }).then(
-						(data) => {
+					//(data)
+						() => {
 								router.push('/projects')
 						}
 				)
@@ -155,7 +156,8 @@ const addProject = async () => {
             name: formState.name,
 						user_id: formState.user
         }).then(
-						(data) => {
+					//(data)
+						() => {
 								router.push('/projects')
 						}
 				)
@@ -170,7 +172,8 @@ const edit = () => {
         name: formState.name,
 
     }).then(
-        (data) => {
+			//(data)
+        () => {
             router.push('/projects')
         }
     )

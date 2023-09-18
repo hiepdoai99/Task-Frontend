@@ -9,7 +9,7 @@ const team_id = route.params.id
 import userVuelidate from '@vuelidate/core'
 import {required, minLength, email, sameAs} from '@vuelidate/validators'
 import {
-  ref,reactive
+  reactive
 } from "vue";
 const formState = reactive({
   first_name:'',
@@ -46,7 +46,7 @@ const handleRegister = async ()=> {
         team_id: team_id,
     })
         .then(
-        (data) => {
+        () => {
             router.push('/login')
         }
     )
