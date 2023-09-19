@@ -20,7 +20,7 @@ import AppFooter from './components/footer.vue'
 }
 
 .content-wrap {
-  padding-bottom: 5rem;    /* Footer height */
+  padding-bottom: 5rem; 
 }
 </style>
 
