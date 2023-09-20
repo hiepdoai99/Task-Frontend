@@ -7,7 +7,6 @@ import {
     onMounted, reactive,ref
 } from "vue";
 import BaseModal from '../components/BaseModal.vue'
-import ViewUserModal from '../components/ViewUserModal.vue'
 const router = useRouter()
 const route = useRoute()
 //let teamDetail = ref()

@@ -5,7 +5,6 @@ import Register from "../views/RegisterPage.vue";
 import TodoDetails from "../views/TodoDetails.vue";
 import AddTodo from "../views/AddTodo.vue";
 import TeamList from "../views/TeamList.vue";
-import AdminPage from "../views/AdminPage.vue";
 import Project from "../views/ProjectPage.vue";
 import VerifyEmail from "../views/ConfirmMail.vue";
 import ErrorMail from "../views/ErrorMail.vue";
@@ -146,12 +145,6 @@ const routerCustom = [
     path: "/team",
     name: "team",
     component: TeamList,
-    beforeEnter: [routeGuarding],
-  },
-  {
-    path: "/admin",
-    name: "admin",
-    component: AdminPage,
     beforeEnter: [routeGuarding],
   },
   {
