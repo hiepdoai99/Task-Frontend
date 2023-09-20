@@ -11,11 +11,11 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 /* import specific icons */
 import {
-    faUserSecret,
-    faEye,
-    faPenToSquare,
-    faDeleteLeft,
-    faBars,
+  faUserSecret,
+  faEye,
+  faPenToSquare,
+  faDeleteLeft,
+  faBars,
 } from "@fortawesome/free-solid-svg-icons";
 
 /* add icons to the library */
@@ -27,17 +27,18 @@ import * as components from "vuetify/components";
 import * as directives from "vuetify/directives";
 
 const vuetify = createVuetify({
-    components,
-    directives,
+  components,
+  directives,
 });
 import router from "./router";
 
 import { createApp } from "vue";
 import App from "./App.vue";
-import './registerServiceWorker'
+//import './registerServiceWorker'
 const app = createApp(App);
 
-app.use(router)
-    .use(vuetify)
-    .component("font-awesome-icon", FontAwesomeIcon)
-    .mount("#app");
+app
+  .use(router)
+  .use(vuetify)
+  .component("font-awesome-icon", FontAwesomeIcon)
+  .mount("#app");
