@@ -3,7 +3,6 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 // vite.config.js / vite.config.ts
 import { VitePWA } from "vite-plugin-pwa";
-
 export default defineConfig({
   plugins: [
     vue(),
@@ -40,7 +39,10 @@ export default defineConfig({
         start_url: ".",
         display: "standalone",
         background_color: "#000000",
+        gcm_sender_id: "103953800507"
       },
+      srcDir: './public',
+      filename: 'custom-sw',
     }),
   ],
 });
