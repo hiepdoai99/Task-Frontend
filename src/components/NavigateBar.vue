@@ -162,11 +162,6 @@ const logout = () =>{
 									<router-link to="/register">Register</router-link>
 							</a>
 					</li>
-					<li v-show="adminVisible === true" class="nav-item">
-							<a class="nav-link" href="#">
-									<router-link to="/admin">Admin</router-link>
-							</a>
-					</li>
 					<li v-show="logoutVisible === true" class="nav-item">
 							<a class="nav-link" href="/logout" @click="logout">
 									Logout

@@ -2,7 +2,6 @@
 import {$axios} from '../utils/request'
 import {useRouter, useRoute} from 'vue-router'
 import BaseModal from '../components/BaseModal.vue'
-import ViewUserModal from '../components/ViewUserModal.vue'
 import {
     onMounted,
     ref, reactive
